@@ -476,4 +476,14 @@ renderFixtures();
 </script>
 </body>
   </html>
-  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://mgctrehlzuwetaxesmqo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_sGiuB4gSfx6A3TP7-xhmRQ__J35BOtD";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
