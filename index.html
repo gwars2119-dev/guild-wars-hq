@@ -369,34 +369,58 @@ return String(s||'').replace(/[&<>"']/g,c=>({
 }[c]));
 }
 
-$('regForm').addEventListener('submit',async e=>{
-e.preventDefault();
-const type=$('regType').value;
-let bannerName='';
-if(type==='Guild' && $('banner').files[0]){
-bannerName=$('banner').files[0].name;
-}
-const registrations=get('gwh_registrations');
-registrations.push({
-type,
-name:$('name').value,
-ign:$('ign').value,
-uid:$('uid').value,
-guild:type==='Guild'?$ ('guildName').value:'',
-guildUid:type==='Guild'?$ ('guildUid').value:'',
-members:type==='Guild'?$ ('members').value:'',
-substitute:type==='Guild'?$ ('substitute').value:'',
-bannerName,
-email:$('email').value,
-phone:$('phone').value,
-date:new Date().toLocaleString()
-});
-save('gwh_registrations',registrations);
-$('regMessage').textContent=
-'Registration saved on this device. Online submission is not connected yet.';
-e.target.reset();
-updateGuildFields();
-});
+<script>
+    const SUPABASE_URL = "https://mgctrehlzuwetaxesmqu.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_sGiUb4gFS6xA3TP7-xhMRQ_J35BOTd";
+
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const regForm = document.getElementById('regForm');
+    regForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      
+      const type = $('#regType').value;
+      let bannerName = '';
+      if(type === 'Guild' && $('#banner').files[0]){
+        bannerName = $('#banner').files[0].name;
+      }
+
+      const registrationData = {
+        type: type,
+        name: $('#name').value,
+        ign: $('#ign').value,
+        uid: $('#uid').value,
+        guildType: type === 'Guild' ? $('#guildName').value : '',
+        guildUid: type === 'Guild' ? $('#guildUID').value : '',
+        members: type === 'Guild' ? $('#members').value : '',
+        substitute: type === 'Guild' ? $('#substitute').value : '',
+        bannerName,
+        email: $('#email').value,
+        phone: $('#phone').value,
+        date: new Date().toLocaleString()
+      };
+
+      try {
+        const { error } = await supabaseClient
+          .from('gwh_registrations')
+          .insert([registrationData]);
+
+        if (error) throw error;
+
+        $('#regMessage').textContent = 'Registration submitted successfully to Supabase!';
+        regForm.reset();
+        updateGuildFields();
+      } catch (err) {
+        alert('Error submitting registration: ' + err.message);
+      }
+    });
+
+    // Keep the rest of your existing initialization or functions here...
+</script>
+
 
 function renderRegistrations(){
 const data=get('gwh_registrations');
