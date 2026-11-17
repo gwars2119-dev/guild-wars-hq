@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d19">
+<title>Guild Wars HQ | Official Esports Arena</title>
+
+<style>
+:root{
+--bg:#080d19;--panel:#111a2b;--panel2:#1b2940;
+--text:#f5f7ff;--muted:#9caac2;--gold:#f4bd50;
+--blue:#397cff;--border:#293750;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:Arial,sans-serif}
+body.light{--bg:#f1f4fa;--panel:#fff;--panel2:#e5ebf5;
+--text:#172238;--muted:#65748c;--border:#d5deeb}
+header{background:var(--panel);padding:16px;
+border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;font-size:21px;color:var(--gold)}
+.logo span{color:var(--text)}
+nav{display:flex;gap:7px;overflow-x:auto;padding-top:15px}
+button{border:0;border-radius:8px;padding:12px 15px;
+font-weight:bold;background:var(--blue);color:white;cursor:pointer}
+nav button{white-space:nowrap;font-size:12px;padding:10px}
+.secondary{background:var(--panel2);color:var(--text)}
+.gold{background:var(--gold);color:#171717}
+.danger{background:#b83248}
+main{max-width:1050px;margin:auto;padding:18px}
+.section{display:none}
+.section.active{display:block}
+.hero{padding:32px 22px;border-radius:16px;
+background:linear-gradient(125deg,#1a315e,#111426 65%,#61451e);
+margin-bottom:18px;border:1px solid var(--border)}
+.hero h1{font-size:36px;color:white}
+.hero p{color:#d4dbea;line-height:1.7}
+.tag{color:var(--gold);font-size:12px;letter-spacing:2px;font-weight:bold}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--border);
+padding:17px;border-radius:12px;margin-bottom:14px}
+.card h3{margin-top:0}
+.stat{font-size:26px;font-weight:900;color:var(--gold)}
+.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.badge{display:inline-block;background:var(--panel2);
+padding:6px 10px;border-radius:20px;font-size:11px}
+input,select,textarea{width:100%;padding:13px;margin:7px 0 14px;
+border-radius:8px;border:1px solid var(--border);
+background:var(--bg);color:var(--text);font:inherit}
+label{font-size:13px;color:var(--muted)}
+form button{width:100%}
+.vip{border:1px solid var(--gold)}
+.price{font-size:38px;font-weight:900;color:var(--gold)}
+.notice{padding:13px;background:var(--panel2);border-radius:9px;
+font-size:13px;color:var(--muted);line-height:1.6;margin:12px 0}
+.item{padding:12px 0;border-bottom:1px solid var(--border)}
+.hidden{display:none!important}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{padding:12px 7px;text-align:left;border-bottom:1px solid var(--border)}
+th{color:var(--gold)}
+footer{text-align:center;padding:30px;color:var(--muted);font-size:12px}
+button:active{opacity:.7}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="top">
+<div class="logo">GUILD <span>WARS HQ</span></div>
+<button class="secondary" onclick="show('settings')">⚙ Settings</button>
+</div>
+<nav>
+<button onclick="show('home')">Home</button>
+<button onclick="show('championship')">Championship</button>
+<button onclick="show('register')">Registration</button>
+<button onclick="show('vip')">VIP</button>
+<button onclick="show('leaderboard')">Leaderboard</button>
+<button onclick="show('updates')">Updates</button>
+<button onclick="show('payments')">Payments</button>
+<button onclick="show('admin')">Admin</button>
+</nav>
+</header>
+
+<main>
+
+<section id="home" class="section active">
+<div class="hero">
+<div class="tag">THE OFFICIAL ESPORTS ARENA</div>
+<h1>YOUR GUILD.<br>YOUR GLORY.</h1>
+<p>Welcome to Guild Wars HQ. Compete against rivals,
+represent your guild and become a champion.</p>
+<button class="gold" onclick="show('register')">JOIN THE BATTLE →</button>
+<button class="secondary" onclick="show('championship')">Explore Championship</button>
+</div>
+
+<div class="grid">
+<div class="card"><div class="muted">Competition</div>
+<div class="stat">GW</div>Championship</div>
+<div class="card"><div class="muted">VIP Membership</div>
+<div class="stat">₦4,500</div>Monthly</div>
+<div class="card"><div class="muted">Standard Entry</div>
+<div class="stat">FREE</div>Registration</div>
+<div class="card"><div class="muted">Formats</div>
+<div class="stat">02</div>Guild + Solo</div>
+</div>
+
+<div class="card">
+<h3>🏆 Guild Wars Championship</h3>
+<p class="muted">Two competition formats. One arena.
+Guild teams and solo players are welcome.</p>
+<button onclick="show('championship')">View competition</button>
+</div>
+
+<div class="card">
+<h3>📢 Latest Announcement</h3>
+<p id="homeNews" class="muted">Guild Wars HQ is preparing for launch!</p>
+</div>
+</section>
+
+<section id="championship" class="section">
+<h2>🏆 Guild Wars Championship</h2>
+
+<div class="card">
+<span class="badge">GUILD FORMAT</span>
+<h3>⚔️ Guild Battles</h3>
+<p class="muted">Each guild must register 4 players and
+1 substitute. Only guild leaders can submit guild registrations
+and guild banners.</p>
+<button onclick="registerType('Guild')">Register Guild</button>
+</div>
+
+<div class="card">
+<span class="badge">SOLO FORMAT</span>
+<h3>👤 Solo Battle Royale</h3>
+<p class="muted">Individual players compete using Battle Royale
+scoring. No guild leader permission is required.</p>
+<button onclick="registerType('Solo')">Register Solo</button>
+</div>
+
+<div class="card">
+<h3>📊 Scoring System</h3>
+<p class="muted">Solo scoring uses placement points and elimination
+points. Guild scoring follows the official match scoring rules
+published by tournament management.</p>
+</div>
+
+<div class="card">
+<h3>📅 Fixtures</h3>
+<div id="fixtures" class="muted">Official fixtures will appear here
+after administrator publication.</div>
+</div>
+</section>
+
+<section id="register" class="section">
+<h2>📝 Competition Registration</h2>
+<div class="notice">Registration is FREE.
+Choose Guild or Solo. VIP membership is optional.</div>
+
+<div class="card">
+<form id="regForm">
+<label>Registration format</label>
+<select id="regType">
+<option value="Solo">Solo Player</option>
+<option value="Guild">Guild Leader</option>
+</select>
+
+<label>Full Name</label>
+<input id="name" required placeholder="Your full name">
+
+<label>Free Fire In-game Name</label>
+<input id="ign" required placeholder="Your IGN">
+
+<label>Free Fire UID</label>
+<input id="uid" required placeholder="Your Free Fire UID">
+
+<div id="guildFields">
+<h3>Guild Information</h3>
+<label>Guild Name</label>
+<input id="guildName" placeholder="Official guild name">
+
+<label>Guild UID</label>
+<input id="guildUid" placeholder="Guild UID">
+
+<label>Guild Banner (Guild Leader Only)</label>
+<input id="banner" type="file" accept="image/*">
+
+<label>Four Team Members (including leader)</label>
+<textarea id="members" placeholder="Player 1 - Name and UID
+Player 2 - Name and UID
+Player 3 - Name and UID
+Player 4 - Name and UID"></textarea>
+
+<label>One Substitute Player</label>
+<input id="substitute" placeholder="Substitute name and UID">
+</div>
+
+<label>Email Address</label>
+<input id="email" type="email" required placeholder="Email">
+
+<label>WhatsApp Number</label>
+<input id="phone" type="tel" required placeholder="Phone number">
+
+<button type="submit">SUBMIT REGISTRATION</button>
+</form>
+<p id="regMessage" class="muted"></p>
+</div>
+</section>
+
+<section id="vip" class="section">
+<h2>💎 Guild Wars HQ VIP</h2>
+<div class="card vip">
+<span class="badge">MONTHLY MEMBERSHIP</span>
+<div class="price">₦4,500</div>
+<p class="muted">VIP Membership</p>
+<ul>
+<li>VIP member status</li>
+<li>Exclusive VIP community benefits</li>
+<li>Special announcements</li>
+<li>Priority access to eligible VIP features</li>
+</ul>
+<button class="gold" onclick="show('payments')">GET VIP</button>
+</div>
+<div class="notice">VIP is optional and does not guarantee
+tournament victory or prize winnings.</div>
+</section>
+
+<section id="leaderboard" class="section">
+<h2>📊 Official Leaderboard</h2>
+<div class="card">
+<div id="leaderboardContent" class="muted">
+No approved competition results yet.
+</div>
+</div>
+</section>
+
+<section id="updates" class="section">
+<h2>📢 News and Updates</h2>
+<div id="newsList" class="card">
+No announcements yet.
+</div>
+</section>
+
+<section id="payments" class="section">
+<h2>💳 Payment Centre</h2>
+<div class="card">
+<h3>VIP Membership</h3>
+<div class="price">₦4,500/month</div>
+<p class="muted">VIP payment instructions will be provided
+through verified official payment channels.</p>
+</div>
+<div class="card">
+<h3>🏆 Winner Payments</h3>
+<p class="muted">Approved winners receive their prizes
+through bank transfers after result verification.</p>
+</div>
+<div class="notice">Payment gateway and bank verification
+are not connected yet. Do not send money to unofficial accounts.</div>
+</section>
+
+<section id="admin" class="section">
+<h2>🛡️ Administration Centre</h2>
+<div class="notice">Development preview only. This is not a secure
+administrator login. A protected backend will be required
+before real administrators can use this dashboard.</div>
+
+<div class="card">
+<h3>Registration Overview</h3>
+<div class="stat" id="totalRegs">0</div>
+<p class="muted">Registrations saved on this device</p>
+<button onclick="renderRegistrations()">Refresh</button>
+</div>
+
+<div class="card">
+<h3>Player Registrations</h3>
+<div id="adminRegistrations">No registrations yet.</div>
+</div>
+
+<div class="card">
+<h3>Publish Announcement</h3>
+<textarea id="announcement" placeholder="Official announcement"></textarea>
+<button onclick="publishNews()">Publish</button>
+</div>
+
+<div class="card">
+<h3>Publish Fixtures</h3>
+<textarea id="fixtureInput" placeholder="Enter official match fixtures"></textarea>
+<button onclick="publishFixtures()">Publish Fixtures</button>
+</div>
+
+<div class="card">
+<h3>Add Competition Results</h3>
+<label>Player or Guild Name</label>
+<input id="scoreName" placeholder="Competitor name">
+<label>Points</label>
+<input id="scorePoints" type="number" placeholder="Points">
+<button onclick="addScore()">Add Result</button>
+</div>
+
+<div class="card">
+<h3>Prize Management</h3>
+<p class="muted">Prize approvals and bank payouts
+require the secure management backend.</p>
+</div>
+</section>
+
+<section id="settings" class="section">
+<h2>⚙️ Settings</h2>
+<div class="card">
+<h3>Choose Website Theme</h3>
+<button onclick="setTheme('dark')">🌙 Dark Esports</button>
+<button class="secondary" onclick="setTheme('light')">☀️ Light Theme</button>
+</div>
+
+<div class="card">
+<h3>Official Contact Information</h3>
+<p>Email: gwars2119@gmail.com</p>
+<p>WhatsApp: 08023759918</p>
+<p>TikTok: @guild_wars5</p>
+<p>Website: Coming soon</p>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="logo">GUILD WARS HQ</div>
+<p>COMPETE • CONQUER • BECOME LEGENDARY</p>
+<p>© 2026 Guild Wars HQ. All rights reserved.</p>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const get=k=>JSON.parse(localStorage.getItem(k)||'[]');
+const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+$(id).classList.add('active');
+window.scrollTo(0,0);
+if(id==='admin')renderRegistrations();
+if(id==='updates')renderNews();
+if(id==='leaderboard')renderScores();
+}
+
+function registerType(type){
+$('regType').value=type;
+updateGuildFields();
+show('register');
+}
+
+function updateGuildFields(){
+const guild=$('regType').value==='Guild';
+$('guildFields').classList.toggle('hidden',!guild);
+['guildName','guildUid','members','substitute'].forEach(id=>{
+$(id).required=guild;
+});
+$('banner').required=false;
+}
+$('regType').addEventListener('change',updateGuildFields);
+updateGuildFields();
+
+function escapeHTML(s){
+return String(s||'').replace(/[&<>"']/g,c=>({
+'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+}
+
+$('regForm').addEventListener('submit',async e=>{
+e.preventDefault();
+const type=$('regType').value;
+let bannerName='';
+if(type==='Guild' && $('banner').files[0]){
+bannerName=$('banner').files[0].name;
+}
+const registrations=get('gwh_registrations');
+registrations.push({
+type,
+name:$('name').value,
+ign:$('ign').value,
+uid:$('uid').value,
+guild:type==='Guild'?$ ('guildName').value:'',
+guildUid:type==='Guild'?$ ('guildUid').value:'',
+members:type==='Guild'?$ ('members').value:'',
+substitute:type==='Guild'?$ ('substitute').value:'',
+bannerName,
+email:$('email').value,
+phone:$('phone').value,
+date:new Date().toLocaleString()
+});
+save('gwh_registrations',registrations);
+$('regMessage').textContent=
+'Registration saved on this device. Online submission is not connected yet.';
+e.target.reset();
+updateGuildFields();
+});
+
+function renderRegistrations(){
+const data=get('gwh_registrations');
+$('totalRegs').textContent=data.length;
+$('adminRegistrations').innerHTML=data.length?
+data.map(x=>`<div class="item">
+<b>${escapeHTML(x.name)}</b>
+<p>${escapeHTML(x.type)} · ${escapeHTML(x.ign)} · UID: ${escapeHTML(x.uid)}</p>
+${x.type==='Guild'?`<p>Guild: ${escapeHTML(x.guild)}</p>`:''}
+</div>`).join(''):'No registrations yet.';
+}
+
+function publishNews(){
+const value=$('announcement').value.trim();
+if(!value)return alert('Enter an announcement.');
+const news=get('gwh_news');
+news.unshift({text:value,date:new Date().toLocaleString()});
+save('gwh_news',news);
+$('announcement').value='';
+$('homeNews').textContent=value;
+renderNews();
+alert('Announcement saved on this device.');
+}
+
+function renderNews(){
+const data=get('gwh_news');
+$('newsList').innerHTML=data.length?
+data.map(x=>`<div class="item"><b>${escapeHTML(x.text)}</b>
+<p class="muted">${escapeHTML(x.date)}</p></div>`).join(''):
+'No announcements yet.';
+}
+
+function publishFixtures(){
+const value=$('fixtureInput').value.trim();
+if(!value)return alert('Enter fixtures first.');
+save('gwh_fixtures',value);
+renderFixtures();
+alert('Fixtures saved on this device.');
+}
+
+function renderFixtures(){
+const value=localStorage.getItem('gwh_fixtures');
+$('fixtures').textContent=value||'Official fixtures will appear here after publication.';
+}
+
+function addScore(){
+const name=$('scoreName').value.trim();
+const points=Number($('scorePoints').value);
+if(!name||$('scorePoints').value===''||!Number.isFinite(points))
+return alert('Enter a name and valid points.');
+const scores=get('gwh_scores');
+scores.push({name,points});
+save('gwh_scores',scores);
+$('scoreName').value='';
+$('scorePoints').value='';
+renderScores();
+alert('Result saved on this device.');
+}
+
+function renderScores(){
+const data=get('gwh_scores').sort((a,b)=>b.points-a.points);
+$('leaderboardContent').innerHTML=data.length?
+'<table><tr><th>Rank</th><th>Competitor</th><th>Points</th></tr>'+
+data.map((x,i)=>`<tr><td>${i+1}</td><td>${escapeHTML(x.name)}</td><td>${x.points}</td></tr>`).join('')+
+'</table>':'No approved results yet.';
+}
+
+function setTheme(theme){
+document.body.classList.toggle('light',theme==='light');
+localStorage.setItem('gwh_theme',theme);
+}
+
+setTheme(localStorage.getItem('gwh_theme')||'dark');
+renderNews();
+renderScores();
+renderFixtures();
+</script>
+</body>
+  </html>
+  
